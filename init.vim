@@ -1,9 +1,15 @@
-" ===================
-" ====== basic ======
-" ===================
+" ============================
+" =========== basic ==========
+" ============================
 
 nnoremap <space> <Nop>
 map <space> <leader>
+
+if has('unnamedplus')
+  set clipboard=unnamedplus,unnamed
+else
+  set clipboard+=unnamed
+endif
 
 " ============================
 " ====== plugin manager ======
@@ -24,18 +30,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'Julian/vim-textobj-brace'
   Plug 'terryma/vim-expand-region'
 call plug#end()
-
-" =================================
-" ======== Better default =========
-" =================================
-
-let g:vim_better_default_buffer_key_mapping = 0
-let g:vim_better_default_file_key_mapping = 0
-let g:vim_better_default_fold_key_mapping = 0
-let g:vim_better_default_window_key_mapping = 0
-runtime! plugin/default.vim
-nunmap <Leader>sc
-nunmap <Leader>tp
 
 " =================================
 " ===== Camel case motion ========
@@ -94,8 +88,19 @@ noremap X x
 xmap q iq
 omap q iq
 
+" ===========================
+" ====== Text matchit =======
+" ===========================
+
+let g:textobj_matchit_no_default_key_mappings = 1
+
+xmap ab  <Plug>(textobj-matchit-a)
+omap ab  <Plug>(textobj-matchit-a)
+xmap ib  <Plug>(textobj-matchit-i)
+omap ib  <Plug>(textobj-matchit-i)
+
 " ===================
-" ====== maps =======
+" ====== Vim maps =======
 " ===================
 
 nnoremap n nzz
@@ -108,22 +113,32 @@ nnoremap <leader>O O<esc>O
 nnoremap <leader>p o<esc>p
 nnoremap <leader>P O<esc>P
 
-" ====================
-" ====== Commentary =======
-" ===================
+nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
-xmap <leader>;  <Plug>VSCodeCommentary
-omap <leader>;  <Plug>VSCodeCommentary
+" ============================
+" ==== VS Code keybinding ====
+" ============================
+
+nnoremap <silent> <leader>s :<C-u>call VSCodeNotify('workbench.action.files.save')<CR>
+nnoremap <silent> <leader>q :<C-u>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
+
+nnoremap <silent> <leader>vv :<C-u>call VSCodeNotify('multiCommand.panelFocus')<CR>
+nnoremap <silent> <leader>vk :<C-u>call VSCodeNotify('multiCommand.panelMaximize')<CR>
+nnoremap <silent> <leader>vj :<C-u>call VSCodeNotify('multiCommand.panelMaximize')<CR>
+nnoremap <silent> <leader>n :<C-u>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
+
+nnoremap <silent> <leader><tab> :<C-u>call VSCodeNotify('multiCommand.goToLastOpenedBuffer')<CR>
+nnoremap <silent> <leader>f :<C-u>call VSCodeNotify('workbench.action.quickOpen')<CR>
+nnoremap <silent> <leader>b :<C-u>call VSCodeNotify('workbench.action.showAllEditors')<CR>
+nnoremap <silent> <leader>r :<C-u>call VSCodeNotify('workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup')<CR>
+
+xmap <leader>; <Plug>VSCodeCommentary
+omap <leader>; <Plug>VSCodeCommentary
 nmap <leader>; <Plug>VSCodeCommentaryLine
 
-
-" ===========================
-" ====== Text matchit =======
-" ===========================
-
-let g:textobj_matchit_no_default_key_mappings = 1
-
-xmap ab  <Plug>(textobj-matchit-a)
-omap ab  <Plug>(textobj-matchit-a)
-xmap ib  <Plug>(textobj-matchit-i)
-omap ib  <Plug>(textobj-matchit-i)
+nnoremap <silent> <leader>gt :<C-u>call VSCodeNotify('altr.switchToNextFile')<CR>
+nnoremap <silent> <leader>tb :<C-u>call VSCodeNotify('multiCommand.runBufferTest')<CR>
+nnoremap <silent> <leader>tt :<C-u>call VSCodeNotify('multiCommand.runLineTest')<CR>
+nnoremap <silent> <leader>tf :<C-u>call VSCodeNotify('multiCommand.runFolderTest')<CR>
+nnoremap <silent> <leader>tp :<C-u>call VSCodeNotify('multiCommand.runProjectTest')<CR>
+nnoremap <silent> <leader>tr :<C-u>call VSCodeNotify('extension.rerunLastCommand')<CR>

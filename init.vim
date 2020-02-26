@@ -28,7 +28,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'adriaanzon/vim-textobj-matchit'
   Plug 'beloglazov/vim-textobj-quotes'
   Plug 'Julian/vim-textobj-brace'
-  Plug 'terryma/vim-expand-region'
 call plug#end()
 
 " =================================

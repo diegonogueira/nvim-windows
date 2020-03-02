@@ -2,6 +2,9 @@
 " =========== basic ==========
 " ============================
 
+nnoremap <space> <Nop>
+map <space> <leader>
+
 if has('unnamedplus')
   set clipboard=unnamedplus,unnamed
 else
@@ -15,8 +18,7 @@ endif
 call plug#begin('~/.vim/plugged')
   Plug 'bkad/CamelCaseMotion'
   Plug 'asvetliakov/vim-easymotion'
-  Plug 'thinca/vim-visualstar'
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'thinca/vim-visualstar'
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-indent'
   Plug 'sgur/vim-textobj-parameter'
@@ -56,23 +58,24 @@ xnoremap <silent> io iw
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
-nmap <C-c>es <Plug>(easymotion-s)
-map <C-c>ew <Plug>(easymotion-bd-w)
-map <C-c>ej <Plug>(easymotion-j)
-map <C-c>ek <Plug>(easymotion-k)
-map <C-c>e/ <Plug>(easymotion-sn)
-omap <C-c>e/ <Plug>(easymotion-tn)
+nmap <leader>e <Plug>(easymotion-s)
+map <Leader>w <Plug>(easymotion-bd-w)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map  <leader>/ <Plug>(easymotion-sn)
+omap <leader>/ <Plug>(easymotion-tn)
 
 " =================================
-" ====== Vim text object ==========
+" ==== vim-textobj-quotes =========
 " =================================
 
 xmap q iq
 omap q iq
 
+
 " =================================
-" ====== Text matchit =======
-" ===========================
+" ======== Text matchit ===========
+" =================================
 
 let g:textobj_matchit_no_default_key_mappings = 1
 
@@ -82,13 +85,20 @@ xmap ib <Plug>(textobj-matchit-i)
 omap ib <Plug>(textobj-matchit-i)
 
 " =================================
+" ======== Commentary =============
+" =================================
+
+xmap <leader>; <Plug>VSCodeCommentary
+nmap <leader>; <Plug>VSCodeCommentary
+" omap <leader>; <Plug>VSCodeCommentary
+nmap <leader>; <Plug>VSCodeCommentaryLine
+
+" =================================
 " ========== Vim maps =============
 " =================================
 
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
 
 nnoremap <leader>o o<cr>
 nnoremap <leader>O O<esc>O
@@ -96,3 +106,13 @@ nnoremap <leader>p o<esc>p
 nnoremap <leader>P O<esc>P
 
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
+
+" =================================
+" ========== Vim visualstar =============
+" =================================
+
+" map * <Plug>(visualstar-*)zz
+" map g* <Plug>(visualstar-g*)zz
+" map # <Plug>(visualstar-#)zz
+" vmap <leader>gc g*``cgn
+" vmap <leader>gd g*``dgn
